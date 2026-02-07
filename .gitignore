@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+
+# Data (Keep small samples, ignore large datasets)
+data/videos/*
+!data/videos/test_video.mp4
+data/images/*
+!data/images/test.jpg
+
+# Models
+models/*
+!models/yolov8n.pt
+
+# Output
+output/*
+runs/
