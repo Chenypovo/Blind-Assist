@@ -8,7 +8,11 @@
 
 ## 📺 Demo & Audio Feedback
 
-![Detection Preview](https://github.com/Chenypovo/Blind-Assist/blob/main/output/demo_preview.gif?raw=true)
+### 🕳 Pothole Detection
+![Pothole Detection Preview](https://github.com/Chenypovo/Blind-Assist/blob/main/output/demo_pothole.gif?raw=true)
+
+### 🏙 Urban Navigation
+![Urban Navigation Preview](https://github.com/Chenypovo/Blind-Assist/blob/main/output/demo_urban.gif?raw=true)
 
 **🔈 Real-time Audio Alerts:**
 The system doesn't just draw boxes; it talks to you. Using macOS native TTS, it provides critical information:
