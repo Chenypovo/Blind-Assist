@@ -6,30 +6,47 @@ from blind_assist.detector import Detector
 
 def main():
     parser = argparse.ArgumentParser(description="Blind Assist: AI-Powered Obstacle Detection")
-    parser.add_argument("--source", type=str, required=True, help="Path to input video file")
-    parser.add_argument("--output", type=str, default="output.mp4", help="Path to output video file")
+    parser.add_argument("--source", type=str, default="0", help="Path to input video file or camera index (default: 0)")
+    parser.add_argument("--output", type=str, default="output.mp4", help="Filename for output video (saved in output/ folder)")
     parser.add_argument("--headless", action="store_true", help="Run without GUI (Output file only)")
     parser.add_argument("--model", type=str, default="models/yolov8n.pt", help="YOLO model path")
     
     args = parser.parse_args()
 
-    if not os.path.exists(args.source):
-        print(f"Error: Source file '{args.source}' not found.")
+    # Create output directory if it doesn't exist
+    output_dir = "output"
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    
+    output_path = os.path.join(output_dir, args.output)
+
+    # Determine if source is a file or a camera index
+    try:
+        source = int(args.source)
+        is_camera = True
+    except ValueError:
+        source = args.source
+        is_camera = False
+
+    if not is_camera and not os.path.exists(source):
+        print(f"Error: Source file '{source}' not found.")
         sys.exit(1)
 
     print(f"Initializing Blind Assist...")
-    print(f"Source: {args.source}")
+    print(f"Source: {source} ({'Camera' if is_camera else 'File'})")
+    print(f"Output: {output_path}")
     print(f"Mode: {'Headless' if args.headless else 'GUI'}")
 
     detector = Detector(model_path=args.model)
-    cap = cv2.VideoCapture(args.source)
+    cap = cv2.VideoCapture(source)
     
     # Video Writer Setup
     width  = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fps    = int(cap.get(cv2.CAP_PROP_FPS))
-    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-    out = cv2.VideoWriter(args.output, fourcc, fps, (width, height))
+    if fps <= 0: fps = 30 # Default for camera
+    fourcc = cv2.VideoWriter_fourcc(*'avc1')
+    out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
 
     frame_count = 0
     
