@@ -68,4 +68,4 @@ python src/main.py --source data/videos/test_video.mp4 --output urban_test.mp4
 
 ## 📜 License
 
-MIT License. Developed by **cyp**.
+MIT License. Developed by **YiPeng Chen**.
