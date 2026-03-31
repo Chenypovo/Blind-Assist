@@ -1,6 +1,6 @@
-# Blind Assist 🦐🦇
+# Blind Assist 
 
-**AI-powered Obstacle & Pothole Detection with Spatial Audio Feedback**
+**Obstacle & Pothole Detection with Spatial Audio Feedback**
 
 > "A Second Pair of Eyes" — Real-time detection, monocular distance estimation, and spatial alerts for urban navigation.
 
